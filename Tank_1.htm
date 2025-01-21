@@ -3,6 +3,26 @@
      <META content="text/html; charset=windows-1251"   http-equiv=Content-Type> 
     <link rel="manifest" href="/manifest.json">
      <TITLE> хрупкая... </TITLE> 
+    <script>
+     // This is the "Offline copy of pages" service worker
+
+const CACHE = "pwabuilder-offline";
+
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
+workbox.routing.registerRoute(
+  new RegExp('/*'),
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: CACHE
+  })
+);
+    </script>
    </HEAD> 
    <BODY background="IMG/4.png" onLoad="time1()" background-attachment:fixed>
 <script src="vasia1.js">
